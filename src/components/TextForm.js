@@ -5,25 +5,30 @@ export default function TextForm(props) {
     const handleUpClick = () => {
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert('Converted to UpperCase', 'success');
     }
     // To LowerCase Function
     const handleLowerClick = () => {
         let newText = text.toLowerCase();
         setText(newText);
+        props.showAlert('Converted to LowerCase', 'success');
     }
     // Remove Extra Space Function
     const handleExtraSpace = () => {
         let newText = text.split(/[ ]+/);
         setText(newText.join(' '));
+        props.showAlert('Removed Extra Space', 'success');
     }
-    // To LowerCase Function
+    // Copy Text Function
     const copyText = () => {
         navigator.clipboard.writeText(text);
+        props.showAlert('Copy to Clipboard', 'success');
     }
     // Clear Function
     const clear = () => {
         let newText = '';
         setText(newText);
+        props.showAlert('Clear all text', 'success');
     }
 
     // onchange Function
@@ -32,10 +37,10 @@ export default function TextForm(props) {
     }
     const [text, setText] = useState('');
     return (
-        <div>
+        <div style={{color: props.mode === 'dark' ? '#fff' : '#000'}}>
             <h1>{props.formHeading}</h1>
             <div className="mb-3">
-                <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="10" placeholder='Type or Pest your text here to change text case'></textarea>
+                <textarea className="form-control" style={{backgroundColor: props.mode === 'dark' ? '#343a40' : '#fff', color: props.mode === 'dark' ? '#fff' : '#000'}} value={text} onChange={handleOnChange} id="myBox" rows="10" placeholder='Type or Pest your text here to change text case'></textarea>
             </div>
             <div className="row mb-3">
                 <div className="col-md-6">
